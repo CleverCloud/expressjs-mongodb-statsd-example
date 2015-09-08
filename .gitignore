@@ -1,3 +1,4 @@
 nodejs-mongodb-demo.iml
 /.idea/
 /node_modules/
+npm-debug.log

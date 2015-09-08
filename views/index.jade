@@ -20,3 +20,8 @@ block content
   div(align="center")
     ul.list-group(id="list" style="width:400px")
       li.list-group-item.active Values
+      each val, uuid in values
+        li.list-group-item(id=uuid)
+          div(align="right" style="float:right")
+            button.btn.btn-danger.btn-xs(id="btn-" + uuid onClick="deleteItem(this.id)") Delete
+          div(align="left")= val
