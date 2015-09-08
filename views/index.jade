@@ -25,3 +25,16 @@ block content
           div(align="right" style="float:right")
             button.btn.btn-danger.btn-xs(id="btn-" + uuid onClick="deleteItem(this.id)") Delete
           div(align="left")= val
+
+  button.btn.btn-primary(type="button" data-toggle="modal" data-target=".modal-error") Button
+
+  div.modal.fade.modal-error(tabindex="-1" role="dialog" aria-labelledby="errorModal" id="errorModal")
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          button.close(type="button" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") &times;
+          h4.modal-title(id="errorModal") Error
+        div.modal-body(id="errorField")
+        div.modal-footer
+          button.btn.btn-danger.btn-sm(type="button" data-dismiss="modal") Close

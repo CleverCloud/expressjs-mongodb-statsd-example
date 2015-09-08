@@ -22,7 +22,8 @@ $(document).ready(function() {
                         addItem(html["value"], html["id"]);
                         $('#value').val('')
                     } else {
-                        alert(html);
+                        $('#errorField').html(html["value"]);
+                        $('#errorModal').modal("show");
                     }
                 }
             });
@@ -56,7 +57,8 @@ function deleteItem(clicked_id) {
                 var item = $('#' + html["value"]);
                 item.remove();
             } else {
-                alert(html)
+                $('#errorField').html(html["value"]);
+                $('#errorModal').modal("show");
             }
         }
     });
