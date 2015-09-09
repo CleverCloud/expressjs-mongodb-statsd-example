@@ -8,14 +8,15 @@ router.get('/', function(req, res) {
   mongodb.getVal(res);
 });
 
-router.get('/create', function(req, res) {
+router.post('/create', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
+  var val = req.body.value;
 
-  if (req.query["value"] === undefined || req.query["value"] === "") {
+  if (val === undefined || val === "") {
     res.send(JSON.stringify({status: "error", value: "Value undefined"}));
     return
   }
-  mongodb.sendVal(req.query["value"], res);
+  mongodb.sendVal(val, res);
 });
 
 router.get('/delete', function(req, res) {

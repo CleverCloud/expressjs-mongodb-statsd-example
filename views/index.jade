@@ -9,7 +9,7 @@ block content
     .navbar-header
       a.navbar-brand(href="#") #{title}
 
-  form.form-inline(align="center" id="createForm" method="get" action="/create")
+  form.form-inline(align="center" id="createForm" method="post" action="/create")
     div.form-group
       input.form-control(type="text" name="value" id="value" placeholder="Value" maxlength=32)
       button.btn.btn-success(type="submit" id="create") Submit
