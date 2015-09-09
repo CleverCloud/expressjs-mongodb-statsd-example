@@ -50,7 +50,7 @@ function deleteItem(clicked_id) {
     var id = clicked_id.substring(4);
     $.ajax({
         url: '/delete',
-        type: 'get',
+        type: 'DELETE',
         data: 'id=' + id,
         success: function(html) {
             if (html["status"] === "ok") {

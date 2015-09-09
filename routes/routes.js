@@ -19,14 +19,16 @@ router.post('/create', function(req, res) {
   mongodb.sendVal(val, res);
 });
 
-router.get('/delete', function(req, res) {
+router.delete('/delete', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
-  if (req.query["id"] === undefined || req.query["id"] === "") {
+  var uuid = req.body.id;
+
+  if (uuid === undefined || uuid === "") {
     res.send(JSON.stringify({status: "error", value: "UUID undefined"}));
     return
   }
-  mongodb.delVal(req.query["id"]);
-  res.send(JSON.stringify({status: "ok", value: req.query["id"]}));
+  mongodb.delVal(uuid);
+  res.send(JSON.stringify({status: "ok", value: uuid}));
 });
 
 module.exports = router;
