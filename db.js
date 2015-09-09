@@ -32,7 +32,7 @@ module.exports = {
                 res.send(JSON.stringify({status: "error", value: "Error, db request failed"}));
                 return
             }
-            res.send(JSON.stringify({status: "ok", value: result["value"], id: result["_id"]}));
+            res.status(201).send(JSON.stringify({status: "ok", value: result["value"], id: result["_id"]}));
         });
     },
 
