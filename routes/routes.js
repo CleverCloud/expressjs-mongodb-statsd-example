@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
   mongodb.getVal(res);
 });
 
-router.post('/create', function(req, res) {
+router.post('/values', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   var val = req.body.value;
 
@@ -19,7 +19,7 @@ router.post('/create', function(req, res) {
   mongodb.sendVal(val, res);
 });
 
-router.delete('/delete/:id', function(req, res) {
+router.delete('/values/:id', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   var uuid = req.params.id;
 

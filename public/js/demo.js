@@ -49,7 +49,7 @@ function addItem(value, id) {
 function deleteItem(clicked_id) {
     var id = clicked_id.substring(4);
     $.ajax({
-        url: '/delete/' + id,
+        url: '/values/' + id,
         type: 'DELETE',
         success: function(html) {
             if (html["status"] === "ok") {
