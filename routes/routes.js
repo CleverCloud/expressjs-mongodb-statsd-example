@@ -19,9 +19,9 @@ router.post('/create', function(req, res) {
   mongodb.sendVal(val, res);
 });
 
-router.delete('/delete', function(req, res) {
+router.delete('/delete/:id', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
-  var uuid = req.body.id;
+  var uuid = req.params.id;
 
   if (uuid === undefined || uuid === "") {
     res.send(JSON.stringify({status: "error", value: "UUID undefined"}));
