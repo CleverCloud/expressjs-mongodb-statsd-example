@@ -29,7 +29,8 @@ module.exports = {
                 var val = result[i];
                 values[val["_id"]] = val["value"]
             }
-            res.render('index', {title: 'NodeJS MongoDB demo', values: values});
+            var title = process.env.TITLE || 'NodeJS MongoDB demo'
+            res.render('index', {title, values: values});
         });
     },
 
