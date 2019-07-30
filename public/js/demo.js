@@ -9,7 +9,7 @@ $(document).ready(function() {
         var value = $('#value').val();
 
         if(value === '') {
-            alert('Les champs doivent êtres remplis');
+            alert('Value field must not be empty');
         }
         else
         {
