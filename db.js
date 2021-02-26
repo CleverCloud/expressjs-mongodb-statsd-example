@@ -13,7 +13,7 @@ module.exports = {
     },
 
     updateGauge : function() {
-        Values.count(function(err, result) {
+        Values.countDocuments(function(err, result) {
             if(!err) {
                 statsd.gauge('values', result);
             }
@@ -52,7 +52,7 @@ module.exports = {
     },
 
     delVal : function(id) {
-        Values.remove({_id: id}, (err) => {
+        Values.deleteOne({_id: id}, (err) => {
             if (err) {
                 console.log(err);
             }
