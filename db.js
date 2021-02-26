@@ -6,7 +6,10 @@ var Values = mongoose.model('values', schema);
 
 module.exports = {
     connectDB : function() {
-        mongoose.connect(process.env.MONGODB_ADDON_URI, { useNewUrlParser: true });
+        mongoose.connect(process.env.MONGODB_ADDON_URI, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
     },
 
     updateGauge : function() {
