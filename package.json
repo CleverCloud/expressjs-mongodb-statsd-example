@@ -11,7 +11,7 @@
     "debug": "~4.1.1",
     "express": "~4.17.1",
     "mongoose": "^5.8.11",
-    "morgan": ">=1.9.1",
+    "morgan": ">=1.10.0",
     "node-statsd": "^0.1.1",
     "pug": "^2.0.4",
     "serve-favicon": "~2.5.0"
