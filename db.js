@@ -6,11 +6,14 @@ var Values = mongoose.model('values', schema);
 
 module.exports = {
     connectDB : function() {
-        mongoose.connect(process.env.MONGODB_ADDON_URI, { useNewUrlParser: true });
+        mongoose.connect(process.env.MONGODB_ADDON_URI, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
     },
 
     updateGauge : function() {
-        Values.count(function(err, result) {
+        Values.countDocuments(function(err, result) {
             if(!err) {
                 statsd.gauge('values', result);
             }
@@ -49,7 +52,7 @@ module.exports = {
     },
 
     delVal : function(id) {
-        Values.remove({_id: id}, (err) => {
+        Values.deleteOne({_id: id}, (err) => {
             if (err) {
                 console.log(err);
             }
