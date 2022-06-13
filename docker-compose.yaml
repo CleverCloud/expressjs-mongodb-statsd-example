@@ -1,0 +1,40 @@
+version: '3'
+
+services: 
+  demo-nodejs-mongodb-rest:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: 'demo-nodejs-mongodb-rest'
+    container_name: 'demo-nodejs-mongodb-rest-cont'
+    restart: unless-stopped
+    env_file: .env
+    environment: 
+      - MONGODB_ADDON_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin
+    ports: 
+      - 8080:3000
+    networks: 
+      - app-network
+    command: ./wait-for.sh db:27017 -- node ./bin/www
+
+  db:
+    image: mongo:4.1.8-xenial
+    container_name: ${MONGO_HOSTNAME}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    ports: 
+      - 27017:27017
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
