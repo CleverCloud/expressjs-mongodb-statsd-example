@@ -3,15 +3,15 @@ extends layout
 block content
   div.github-fork-ribbon-wrapper.right
     div.github-fork-ribbon
-      a(href='https://github.com/CleverCloud/demo-nodejs-mongodb') Fork me on GitHub
+      a(class="github-fork-ribbon" href='https://github.com/CleverCloud/demo-nodejs-mongodb' data-ribbon="Fork me on GitHub" title="Fork me on GitHub") Fork me on GitHub
 
-  nav.navbar.navbar-default( role="navigation" )
+  nav.navbar.navbar-default( role="navigation" class="bg-dark" data-bs-theme="dark")
     .navbar-header
       a.navbar-brand(href="#") #{title} 😭
 
   form.form-inline(align="center" id="createForm" method="post" action="/values")
     div.form-group
-      input.form-control(type="text" name="value" id="value" placeholder="Value" maxlength=32)
+      input.form-control(type="text" name="value" id="value" placeholder="Value" maxlength=32 class="w-25")
       button.btn.btn-success(type="submit" id="create") Submit
 
   br
@@ -24,6 +24,11 @@ block content
           div(align="right" style="float:right")
             button.btn.btn-danger.btn-xs(id="btn-" + uuid onClick="deleteItem(this.id)") Delete
           div(align="left")= val
+  
+  br
+
+  div(align="center")
+    p Vous pouvez retrouver d'autre exemple et démo sur notre #[a(href="https://github.com/CleverCloud") Github]
 
   div.modal.fade.modal-error(tabindex="-1" role="dialog" aria-labelledby="errorModal" id="errorModal")
     div.modal-dialog
@@ -35,3 +40,21 @@ block content
         div.modal-body(id="errorField")
         div.modal-footer
           button.btn.btn-danger.btn-sm(type="button" data-dismiss="modal") Close
+          
+block foot 
+  footer(id="footer")
+    div(id="footer-container" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top")
+      div(class="col-md-4 d-flex align-items-center")
+        a(href="https://www.clever.cloud/fr/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Clever Cloud") #[img(width="50" height="50" src="img/clever-svg.svg")]
+        span(class="mb-3 mb-md-0 text-body-secondary") Clever Cloud
+      ul.list-unstyled(class="nav col-md-4 justify-content-end d-flex") 
+          li(class="ms-3") 
+            a(class="text-body-secondary" href="https://www.youtube.com/@Clevercloud-platform" aria-label="Youtube") #[img(width="50" height="50" src="img/youtube.svg")]
+          li(class="ms-3") 
+            a(class="text-body-secondary" href="https://www.linkedin.com/products/clever-cloud/" aria-label="LinkedIn") #[img(width="45" height="45" src="img/linkedin.svg")]
+          li(class="ms-3") 
+            a(class="text-body-secondary" href="https://x.com/clever_cloudFR" aria-label="Twitter") #[img(width="45" height="45" src="img/twitter.svg")]
+          li(class="ms-3") 
+            a(class="text-body-secondary" href="https://bsky.app/profile/clever-cloud.com" aria-label="BlueSky") #[img(width="45" height="45" src="img/Bluesky.svg")]
+          li(class="ms-3") 
+            a(class="text-body-secondary" href="https://www.tiktok.com/@clevercloud_" aria-label="TikTok") #[img(width="45" height="45" src="img/tiktok.svg")]
