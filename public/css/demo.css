@@ -1,0 +1,11 @@
+html{height: 100%;}
+body{min-height: 100%;position: relative;}
+footer{position: absolute;bottom: 0;width: 100%;}
+
+.navbar-brand {padding-left:10px;}
+
+
+#footer-container{ max-width: 1200px;margin-right: auto;margin-left: auto;}
+#value {margin:10px; border-width: 2px}
+#value:focus {box-shadow:none; border: 2px solid #2180abff}
+#create {margin-left:10px;}

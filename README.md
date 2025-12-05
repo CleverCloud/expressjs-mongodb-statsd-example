@@ -4,7 +4,37 @@ This is an example NodeJS application that works with MongoDB on Clever Cloud.
 
 The application is a very simple list where you can add or delete values.
 
-To install it, simply fork this repository and create an application from your GitHub repo.
-Then create a MongoDB add-on and link it to your application, either via the <a href="https://www.clever-cloud.com/doc/clever-tools/getting_started/" target="_blank">Clever Tools CLI</a> or via the <a href="https://console.clever-cloud.com/" target="_blank">Clever Cloud console</a>.
+### Before You Begin
+
+Before starting the deployment process, you'll need to decide on:
+
+- `<APP_ALIAS>` your chosen application alias
+- `<ADDON_NAME>` your chosen add-on name
+
+### Using Clever Tools CLI
+
+Follow these steps to deploy this app on Clever Cloud using the command line:
+
+```bash
+
+# Step 1: Clone the application
+git clone https://github.com/CleverCloud/expressjs-mongodb-statsd-example.git
+cd expressjs-mongodb-statsd-example
+
+# Step 2: Create a Node.js application
+clever create --type node --alias <APP_ALIAS>
+
+# Step 3: Create required add-on and link it
+clever addon create mongodb-addon --plan xs_sml <ADDON_NAME> --link <APP_ALIAS>
+```
+
+## Deployment
+
+Now, you can deploy your application:
+
+```bash
+git add . && git commit -m "Initial commit"
+clever deploy
+```
 
 That's it, the application will use the environnement variables to connect to MongoDB.
