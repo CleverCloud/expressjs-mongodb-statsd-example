@@ -8,7 +8,7 @@ The application is a very simple list where you can add or delete values.
 
 Before starting the deployment process, you'll need to decide on:
 
-- **Application Name**: Choose a unique name for your n8n application (e.g., `my-n8n-app`)
+- **Application Name**: Choose a unique name for your n8n application (e.g., `my-expressExample-app`)
 
 You'll use these values throughout the deployment process. In the commands below, replace:
 
@@ -17,7 +17,7 @@ You'll use these values throughout the deployment process. In the commands below
 
 ### Using Clever Tools CLI
 
-Follow these steps to deploy n8n on Clever Cloud using the command line:
+Follow these steps to deploy this app on Clever Cloud using the command line:
 
 ```bash
 
