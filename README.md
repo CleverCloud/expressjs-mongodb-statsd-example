@@ -8,12 +8,8 @@ The application is a very simple list where you can add or delete values.
 
 Before starting the deployment process, you'll need to decide on:
 
-- **Application Name**: Choose a unique name for your n8n application (e.g., `my-expressExample-app`)
-
-You'll use these values throughout the deployment process. In the commands below, replace:
-
-- `<APP_ALIAS>` with your chosen application alias
-- `<ADDON_NAME>` with your chosen add-on name
+- `<APP_ALIAS>` your chosen application alias
+- `<ADDON_NAME>` your chosen add-on name
 
 ### Using Clever Tools CLI
 
