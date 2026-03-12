@@ -1,60 +1,58 @@
-var mongoose = require('mongoose');
-var statsd = require('./statsd');
+const mongoose = require('mongoose');
+const statsd = require('./statsd');
 
-var schema = mongoose.Schema({value: String});
-var Values = mongoose.model('values', schema);
+const schema = new mongoose.Schema({ value: String });
+const Values = mongoose.model('values', schema);
 
 module.exports = {
-    connectDB : function() {
-        mongoose.connect(process.env.MONGODB_ADDON_URI, { useNewUrlParser: true });
-    },
+  connectDB() {
+    mongoose.connect(process.env.MONGODB_ADDON_URI);
+  },
 
-    updateGauge : function() {
-        Values.count(function(err, result) {
-            if(!err) {
-                statsd.gauge('values', result);
-            }
-        })
-    },
-
-    getVal : function(res) {
-        Values.find(function(err, result) {
-            if (err) {
-                console.log(err);
-                res.send('database error');
-                return
-            }
-            var values = {};
-            for (var i in result) {
-                var val = result[i];
-                values[val["_id"]] = val["value"]
-            }
-            var title = process.env.TITLE || 'NodeJS MongoDB demo'
-            res.render('index', {title, values: values});
-        });
-    },
-
-    sendVal : function(val, res) {
-        var request = new Values({value: val});
-        request.save((err, result) => {
-            if (err) {
-                console.log(err);
-                res.send(JSON.stringify({status: "error", value: "Error, db request failed"}));
-                return
-            }
-            this.updateGauge();
-            statsd.increment('creations');
-            res.status(201).send(JSON.stringify({status: "ok", value: result["value"], id: result["_id"]}));
-        });
-    },
-
-    delVal : function(id) {
-        Values.remove({_id: id}, (err) => {
-            if (err) {
-                console.log(err);
-            }
-            this.updateGauge();
-            statsd.increment('deletions');
-        });
+  async updateGauge() {
+    try {
+      const count = await Values.countDocuments();
+      statsd.gauge('values', count);
+    } catch (err) {
+      console.error(err);
     }
+  },
+
+  async getVal(res) {
+    try {
+      const result = await Values.find();
+      const values = {};
+      for (const val of result) {
+        values[val._id] = val.value;
+      }
+      const title = process.env.TITLE || 'NodeJS MongoDB demo';
+      res.render('index', { title, values });
+    } catch (err) {
+      console.error(err);
+      res.send('database error');
+    }
+  },
+
+  async sendVal(val, res) {
+    try {
+      const doc = new Values({ value: val });
+      const result = await doc.save();
+      this.updateGauge();
+      statsd.increment('creations');
+      res.status(201).json({ status: 'ok', value: result.value, id: result._id });
+    } catch (err) {
+      console.error(err);
+      res.json({ status: 'error', value: 'Error, db request failed' });
+    }
+  },
+
+  async delVal(id) {
+    try {
+      await Values.deleteOne({ _id: id });
+      this.updateGauge();
+      statsd.increment('deletions');
+    } catch (err) {
+      console.error(err);
+    }
+  }
 };

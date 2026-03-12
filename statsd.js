@@ -1,3 +1,3 @@
-const statsd = require('node-statsd');
-const client = new statsd();
+const StatsD = require('hot-shots');
+const client = new StatsD();
 module.exports = client;

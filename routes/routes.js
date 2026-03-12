@@ -1,34 +1,27 @@
-var express = require('express');
-var mongodb = require('../db');
+const express = require('express');
+const mongodb = require('../db');
 
-var router = express.Router();
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   mongodb.getVal(res);
 });
 
-router.post('/values', function(req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  var val = req.body.value;
-
-  if (val === undefined || val === "") {
-    res.send(JSON.stringify({status: "error", value: "Value undefined"}));
-    return
+router.post('/values', (req, res) => {
+  const val = req.body.value;
+  if (!val) {
+    return res.json({ status: 'error', value: 'Value undefined' });
   }
   mongodb.sendVal(val, res);
 });
 
-router.delete('/values/:id', function(req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  var uuid = req.params.id;
-
-  if (uuid === undefined || uuid === "") {
-    res.send(JSON.stringify({status: "error", value: "UUID undefined"}));
-    return
+router.delete('/values/:id', (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    return res.json({ status: 'error', value: 'UUID undefined' });
   }
-  mongodb.delVal(uuid);
-  res.send(JSON.stringify({status: "ok", value: uuid}));
+  mongodb.delVal(id);
+  res.json({ status: 'ok', value: id });
 });
 
 module.exports = router;
